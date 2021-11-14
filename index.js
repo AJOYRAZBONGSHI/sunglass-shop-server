@@ -29,14 +29,16 @@ async function run() {
       const services = await cursor.toArray();
       res.send(services);
     });
-    // GET API delivery
-    app.get("/delivery", async (req, res) => {
-      const cursor = deliveryCollection.find({});
-      const delivery = await cursor.toArray();
-      res.send(delivery);
+
+    // Post api Services
+    app.post("/services", async (req, res) => {
+      const service = req.body;
+
+      const result = await productCollection.insertOne(service);
+      res.json(result);
     });
 
-    // GET API AdddProductInfo
+    // GET API AddProductInfo
 
     app.get("/addProductInfo", async (req, res) => {
       const cursor = productInfoCollection.find({});
@@ -51,22 +53,6 @@ async function run() {
       const result = await productInfoCollection.insertOne(addProductInfo);
       res.json(result);
     });
-    // Post api Services
-    app.post("/services", async (req, res) => {
-      const service = req.body;
-
-      const result = await productCollection.insertOne(service);
-      res.json(result);
-    });
-
-    // POST API Delivery
-    app.post("/delivery ", async (req, res) => {
-      const delivery = req.body;
-      const result = await deliveryCollection.insertOne(delivery);
-      console.log(result);
-
-      res.json(result);
-    });
 
     // Delete Api & Delete Dta
 
@@ -76,6 +62,22 @@ async function run() {
         _id: ObjectId(req.params.id),
       });
       res.send(result);
+    });
+
+    // GET API delivery
+    app.get("/delivery", async (req, res) => {
+      const cursor = deliveryCollection.find({});
+      const delivery = await cursor.toArray();
+      res.send(delivery);
+    });
+
+    // POST API Delivery
+    app.post("/delivery ", async (req, res) => {
+      const delivery = req.body;
+      const result = await deliveryCollection.insertOne(delivery);
+      console.log(result);
+
+      res.json(result);
     });
   } finally {
     // await client.close()
