@@ -72,13 +72,12 @@ async function run() {
     });
 
     // POST API review
-    app.post("/reviews ", async (req, res) => {
+    app.post("/reviews", async (req, res) => {
       const review = req.body;
       const result = await reviewCollection.insertOne(review);
-      console.log(result);
-
       res.json(result);
     });
+
   } finally {
     // await client.close()
   }
