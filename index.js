@@ -21,7 +21,7 @@ async function run() {
     const database = client.db("Digital_Service");
     const productCollection = database.collection("services");
     const productInfoCollection = database.collection("addProductInfo");
-    const reviewCollection = database.collection("review");
+    const reviewCollection = database.collection("reviews");
 
     // GET API
     app.get("/services", async (req, res) => {
