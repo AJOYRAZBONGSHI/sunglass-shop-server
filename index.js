@@ -20,8 +20,8 @@ async function run() {
     await client.connect();
     const database = client.db("Digital_Service");
     const productCollection = database.collection("services");
-    const deliveryCollection = database.collection("delivery");
     const productInfoCollection = database.collection("addProductInfo");
+    const reviewCollection = database.collection("review");
 
     // GET API
     app.get("/services", async (req, res) => {
@@ -64,17 +64,17 @@ async function run() {
       res.send(result);
     });
 
-    // GET API delivery
-    app.get("/delivery", async (req, res) => {
-      const cursor = deliveryCollection.find({});
-      const delivery = await cursor.toArray();
-      res.send(delivery);
+    // GET API review
+    app.get("/reviews", async (req, res) => {
+      const cursor = reviewCollection.find({});
+      const review = await cursor.toArray();
+      res.send(review);
     });
 
-    // POST API Delivery
-    app.post("/delivery ", async (req, res) => {
-      const delivery = req.body;
-      const result = await deliveryCollection.insertOne(delivery);
+    // POST API review
+    app.post("/reviews ", async (req, res) => {
+      const review = req.body;
+      const result = await reviewCollection.insertOne(review);
       console.log(result);
 
       res.json(result);
